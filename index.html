@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discord Webhook Mobile</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- LOGIN -->
+  <div id="loginScreen" class="screen">
+    <h2>Webhook Login</h2>
+    <input type="text" id="webhookInput" placeholder="Webhook URL">
+    <input type="text" id="nameInput" placeholder="Name (optional)">
+    <input type="text" id="avatarInput" placeholder="Avatar URL (optional)">
+    <button>Login</button>
+  </div>
+
+  <!-- CHAT -->
+  <div id="chatScreen" class="screen hidden">
+    <div class="chat-header">
+      Discord Webhook
+      <button class="open-embed">Create Embed</button>
+      <button class="edit-message-btn">Edit Message</button>
+    </div>
+
+    <div id="messages" class="chat-messages"></div>
+
+    <div class="chat-input">
+      <input type="text" id="msgInput" placeholder="Write a message...">
+      <input type="file" id="fileInput" accept="image/*">
+      <button>Send</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- EMBED POPUP -->
+<div id="embedPopup" class="popup hidden">
+  <div class="popup-content">
+    <h3>Create/Edit Embed</h3>
+
+    <div id="embedEditSection" class="hidden">
+      <input type="text" id="embedEditMsgId" placeholder="Message ID to Edit">
+      <button class="edit-embed">Edit Embed</button>
+    </div>
+
+    <input type="text" id="embedTitle" placeholder="Title" oninput="updatePreview()">
+    <textarea id="embedDesc" placeholder="Description" oninput="updatePreview()"></textarea>
+    <input type="color" id="embedColor" value="#5865f2" onchange="updatePreview()">
+    <input type="text" id="embedFooter" placeholder="Footer" oninput="updatePreview()">
+
+    <div class="embed-preview">
+      <strong>Preview:</strong>
+      <div class="embed-box">
+        <div id="previewTitle" class="embed-title"></div>
+        <div id="previewDesc" class="embed-desc"></div>
+        <div id="previewFooter" class="embed-footer"></div>
+      </div>
+    </div>
+
+    <button class="send">Send Embed</button>
+    <button class="cancel">Cancel</button>
+    <button class="open-edit">Edit Existing Embed</button>
+  </div>
+</div>
+
+<!-- NORMAL MESSAGE EDIT POPUP -->
+<div id="editMessagePopup" class="popup hidden">
+  <div class="popup-content">
+    <h3>Edit Message</h3>
+    <input type="text" id="editMsgIdInput" placeholder="Message ID">
+    <textarea id="editMsgContent" placeholder="New Content"></textarea>
+    <button class="send">Edit</button>
+    <button class="cancel">Cancel</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
+
+<link rel="manifest" href="manifest.json">
+
+</body>
+</html>
