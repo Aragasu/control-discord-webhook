@@ -29,7 +29,7 @@ It allows you to send messages, embeds, and attachments directly through a webho
 
 1. Clone the repository
 
-`git clone https://github.com/yourusername/webhook-client.git
+`git clone https://github.com/aragasu/discord-webhook-client.git
 cd webhook-client`
 
 2. Run locally
